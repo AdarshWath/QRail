@@ -1,0 +1,57 @@
+import qrcode
+import os
+import csv
+from datetime import datetime
+
+counter_file = "counter.txt"
+csv_file = "qr_data.csv"
+output_folder = "qr_codes"
+
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
+
+if os.path.exists(counter_file):
+    with open(counter_file, "r") as f:
+        last_id = int(f.read())
+else:
+    last_id = 0
+
+try:
+    num_qr_to_generate = int(input("Enter number of QR codes to generate: "))
+except ValueError:
+    num_qr_to_generate = 1
+
+product_id = input("Enter Product ID: ")
+
+today_date = datetime.now().strftime("%d%m%Y")
+
+file_exists = os.path.isfile(csv_file)
+with open(csv_file, "a", newline="") as file:
+    writer = csv.writer(file)
+    if not file_exists:
+        writer.writerow(["ID", "QR_Data", "Image_File"])
+    
+    for _ in range(num_qr_to_generate):
+        last_id += 1
+        qr_data = f"BSP{today_date}{product_id}{last_id}"
+
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_H,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(qr_data)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+
+        img_file = os.path.join(output_folder, f"qr_{last_id}.png")
+        img.save(img_file)
+
+        writer.writerow([last_id, qr_data, img_file])
+        print(f"✅ Generated QR: {img_file} with data: {qr_data}")
+
+with open(counter_file, "w") as f:
+    f.write(str(last_id))
+
+print(f"\n✅ Successfully generated {num_qr_to_generate} QR codes.")
