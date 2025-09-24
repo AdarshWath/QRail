@@ -1,0 +1,87 @@
+{
+  "name": "Inspection",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "description": "Reference to the inventory item being inspected"
+    },
+    "generated_id": {
+      "type": "string",
+      "description": "Generated ID of the item being inspected"
+    },
+    "inspector_email": {
+      "type": "string",
+      "description": "Email of the person conducting inspection"
+    },
+    "inspection_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the inspection was conducted"
+    },
+    "inspection_status": {
+      "type": "string",
+      "enum": [
+        "passed",
+        "failed",
+        "needs_attention"
+      ],
+      "description": "Result of the inspection"
+    },
+    "complaint_type": {
+      "type": "string",
+      "enum": [
+        "damaged",
+        "missing_parts",
+        "defective",
+        "incorrect_item",
+        "other"
+      ],
+      "description": "Type of issue found during inspection"
+    },
+    "complaint_description": {
+      "type": "string",
+      "description": "Detailed description of the complaint/issue"
+    },
+    "voice_complaint_url": {
+      "type": "string",
+      "description": "URL to voice recording of the complaint"
+    },
+    "location_latitude": {
+      "type": "number",
+      "description": "GPS latitude where inspection was conducted"
+    },
+    "location_longitude": {
+      "type": "number",
+      "description": "GPS longitude where inspection was conducted"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ],
+      "default": "medium",
+      "description": "Priority level of the complaint"
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "in_progress",
+        "resolved"
+      ],
+      "default": "open",
+      "description": "Current status of complaint resolution"
+    }
+  },
+  "required": [
+    "item_id",
+    "generated_id",
+    "inspector_email",
+    "inspection_date",
+    "inspection_status"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "name": "Batch",
+  "type": "object",
+  "properties": {
+    "vendor_name": {
+      "type": "string",
+      "description": "Manufacturer/Vendor name"
+    },
+    "manufacturer_code": {
+      "type": "string",
+      "description": "3-letter manufacturer code (e.g., BRS)"
+    },
+    "date_received": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when batch was received"
+    },
+    "warranty_period": {
+      "type": "string",
+      "enum": [
+        "6_months",
+        "1_year",
+        "2_years",
+        "3_years"
+      ],
+      "default": "1_year",
+      "description": "Warranty period for the batch"
+    },
+    "railway_zone": {
+      "type": "string",
+      "enum": [
+        "Central",
+        "Western",
+        "Eastern",
+        "Northern",
+        "Southern",
+        "North_Eastern",
+        "Northeast_Frontier",
+        "East_Central",
+        "East_Coast",
+        "North_Central",
+        "North_Western",
+        "South_Central",
+        "South_Eastern",
+        "South_Western",
+        "West_Central"
+      ],
+      "description": "Railway zone"
+    },
+    "division": {
+      "type": "string",
+      "description": "Railway division"
+    },
+    "depot_name": {
+      "type": "string",
+      "description": "Depot name where items are stored"
+    },
+    "product_id": {
+      "type": "string",
+      "description": "Product ID for this batch"
+    },
+    "batch_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "scanning",
+        "completed"
+      ],
+      "default": "active",
+      "description": "Current status of the batch"
+    },
+    "total_items_scanned": {
+      "type": "number",
+      "default": 0,
+      "description": "Total number of items scanned in this batch"
+    }
+  },
+  "required": [
+    "vendor_name",
+    "manufacturer_code",
+    "date_received",
+    "railway_zone",
+    "division",
+    "depot_name",
+    "product_id"
+  ]
+}

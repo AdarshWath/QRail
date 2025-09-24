@@ -1,0 +1,79 @@
+{
+  "name": "InventoryItem",
+  "type": "object",
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "description": "Reference to the batch this item belongs to"
+    },
+    "generated_id": {
+      "type": "string",
+      "description": "Auto-generated ID in format: BRS02092025120001"
+    },
+    "qr_code_data": {
+      "type": "string",
+      "description": "Raw QR code data that was scanned"
+    },
+    "scan_number": {
+      "type": "number",
+      "description": "Sequential number for this item within the batch"
+    },
+    "scan_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this item was scanned"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scanned",
+        "verified",
+        "installed",
+        "damaged",
+        "missing"
+      ],
+      "default": "scanned",
+      "description": "Status of the inventory item"
+    },
+    "installation_data": {
+      "type": "object",
+      "properties": {
+        "installed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the item was installed"
+        },
+        "location_latitude": {
+          "type": "number",
+          "description": "GPS latitude of installation location"
+        },
+        "location_longitude": {
+          "type": "number",
+          "description": "GPS longitude of installation location"
+        },
+        "location_address": {
+          "type": "string",
+          "description": "Readable address of installation location"
+        },
+        "voice_note_url": {
+          "type": "string",
+          "description": "URL to the voice recording file"
+        },
+        "installation_remarks": {
+          "type": "string",
+          "description": "Text remarks about the installation"
+        },
+        "installed_by": {
+          "type": "string",
+          "description": "Email of user who installed the item"
+        }
+      }
+    }
+  },
+  "required": [
+    "batch_id",
+    "generated_id",
+    "qr_code_data",
+    "scan_number"
+  ]
+}
